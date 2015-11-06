@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 2.8)
+project( DASM )
+
+find_package(OpenMP)
+if(OPENMP_FOUND)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
+endif()
+
+find_package( OpenCV REQUIRED )
+find_package( Boost COMPONENTS program_options filesystem system date_time exception REQUIRED )
+include_directories( ${Boost_INCLUDE_DIR} )
+add_executable( DASM main.cpp Train.cpp Shape.cpp Search.cpp Profile.cpp PCA.cpp FileIO.cpp Detect.cpp Covariance.cpp )
+target_link_libraries( DASM ${OpenCV_LIBS} )
+target_link_libraries( DASM ${Boost_LIBRARIES} )

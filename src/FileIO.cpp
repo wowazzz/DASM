@@ -66,7 +66,7 @@ int Shape::loadDirectory(vector<Shape> &allShapes,  path& directoryName){
 						}
 					}
 					if(flag){		// if image was found continue			
-						ifstream fileStream(_itr->path().string());			// open the file stream
+						ifstream fileStream(_itr->path().string().c_str());			// open the file stream
 						if( fileStream.is_open() ){					// Parse the entire file						
 							std::getline(fileStream,line);				// version: 1
 							fileStream >> line;						// n_points: 
@@ -114,7 +114,7 @@ int Shape::writePointsFile(path outDirectory){
 	outDirectory /= _filename;
 	//string test = outDirectory.string();
 	//cout << test << endl;
-	ofstream fileStream(outDirectory.string(), ios::out);
+	ofstream fileStream(outDirectory.string().c_str(), ios::out);
 	if( fileStream.is_open() ){
 
 		fileStream << "version: 1" << endl;
@@ -139,7 +139,7 @@ int Parts::loadPartsFile(vector<Parts> &allParts, path& partsFileName){
 
 	string line;
 	if(extension(partsFileName) == ".parts"){
-		ifstream fileStream(partsFileName.string());			// open the file stream
+		ifstream fileStream(partsFileName.string().c_str());			// open the file stream
 		if( fileStream.is_open() ){					// Parse the entire file
 			while(!fileStream.eof()){				// Continue until the end of file
 				std::getline(fileStream,line);		// "part "..." {"
@@ -239,7 +239,7 @@ int Model::loadImagesForSearch(path& pathName, vector<Shape> &toBeSearched){
 //-- Function to load the model from a text file
 int Model::loadASMfromTxtFile(path& inFileName){
 
-	ifstream fileStream(inFileName.string(), ios::in );
+	ifstream fileStream(inFileName.string().c_str(), ios::in );
 
 	if( fileStream.is_open() ){
 		string line;
@@ -453,7 +453,7 @@ int Model::loadASMfromTxtFile(path& inFileName){
 //-- Function to load the model from binary
 int Model::loadASMfromBinFile(path& inFileName){
 
-	ifstream fileStream (inFileName.string(), ios::binary);
+	ifstream fileStream (inFileName.string().c_str(), ios::binary);
 
 	if(fileStream.is_open()){
 
@@ -564,7 +564,7 @@ int Model::loadASMfromBinFile(path& inFileName){
 int Model::writeASMtoBinFile(path outFileName){
 
 	outFileName /= "asm.bin";
-	ofstream fileStream (outFileName.string(), ios::binary);
+	ofstream fileStream (outFileName.string().c_str(), ios::binary);
 
 	/*
 		//--Model Attributes
@@ -683,7 +683,7 @@ int Model::writeASMtoBinFile(path outFileName){
 int Model::writeASMtoTxtFile(path outFileName){
 
 	outFileName /= "asm.txt";
-	ofstream fileStream (outFileName.string(), ios::out);
+	ofstream fileStream (outFileName.string().c_str(), ios::out);
 	pt::ptime now = pt::second_clock::local_time();
 	/*
 		DASM Model Produced:  date/time

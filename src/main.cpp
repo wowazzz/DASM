@@ -108,7 +108,7 @@ int main(int argc, char* argv[]){
 	else
 		omp_set_num_threads(1);
 	// Read the Config file
-	ifstream s(vm["config"].as<string>());
+	ifstream s(vm["config"].as<string>().c_str());
 	if(!s)
 	{
 		cerr<<"Failed to open Configuration File"<< endl;

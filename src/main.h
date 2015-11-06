@@ -355,13 +355,13 @@ private:
 
 public:
 	// Constructor
-	Model::Model(int num1DLevels, int num2DLevels, int profLength1d, int profLength2d)
+	Model(int num1DLevels, int num2DLevels, int profLength1d, int profLength2d)
 	{nLevels1D = num1DLevels;
 	nLevels2D = num2DLevels;
 	ProfLen1d = profLength1d;
 	ProfLen2d = profLength2d;
 	};
-	Model::Model();
+	Model();
 
 	vector<Parts> getModelParts(){return ModelParts;}
 	vector< vector <Profile1D> > getMean1DProfs(){return ModelMean1DProfiles;}

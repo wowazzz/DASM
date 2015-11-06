@@ -60,7 +60,8 @@ int trainASM(path inputDir, path outputDir, path modelDir, path partsPath, path 
 		cout << "All images and points pre-scaled or padded to " << dsize.width << "x" << dsize.height << endl;
 		cout << "Training all profiles... ";
 	}
-	Shape::trainAllProfiles(allShapes, model.getModelParts(), dsize);	// Train all of the profiles for each image
+	std::vector<Parts> parts = model.getModelParts();
+	Shape::trainAllProfiles(allShapes, parts, dsize);	// Train all of the profiles for each image
 	if(Constants::instance()->isVerbose())
 		cout << "done\n";
 
