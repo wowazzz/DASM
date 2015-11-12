@@ -51,6 +51,7 @@ int VJ_Detector::init(path face_cascade_name){
 
 	if( !face_cascade->load( face_cascade_name.string() ) ){ cout << "--(!)Error loading " << face_cascade_name.string() <<endl; return FAILURE; };
 
+
 	return SUCCESS;
 }
 //-- Sets up the PittPatt face detector
@@ -97,6 +98,8 @@ void VJ_Detector::detect(Shape &shape) const{
 //-- There is no guarantee that a face will be found (or if what is detected is actually a face :-/ )
 #ifdef WITH_PITTPATT
 void PP_Detector::detect(Shape &shape) const{
+cout << "_2";
+exit(0);		
 
 	Mat frame_gray = shape.getOrigImgData(); 
 	Size halfSize = Size(frame_gray.cols/2, frame_gray.rows/2); // Half the size of the image to speed up the detection (So don't use really small images...)

@@ -362,7 +362,11 @@ public:
 	ProfLen2d = profLength2d;
 	};
 	Model();
-
+	
+	VJ_Detector VJDet;  // Detector object
+#ifdef WITH_PITTPATT
+	PP_Detector PPDet;
+#endif
 	vector<Parts> getModelParts(){return ModelParts;}
 	vector< vector <Profile1D> > getMean1DProfs(){return ModelMean1DProfiles;}
 	vector< vector <Profile2D> > getMean2DProfs(){return ModelMean2DProfiles;}

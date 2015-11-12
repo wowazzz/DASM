@@ -465,15 +465,18 @@ int Model::loadASMfromBinFile(path& inFileName){
 		fileStream.read((char*)(&ProfLen1d), sizeof(int));
 		fileStream.read((char*)(&ProfLen2d), sizeof(int));
 		fileStream.read((char*)(&DetRefWidth), sizeof(int));
-		fileStream.read((char*)(&transX), sizeof(float));
-		fileStream.read((char*)(&transY), sizeof(float));
+		//fileStream.read((char*)(&transX), sizeof(float));
+		//fileStream.read((char*)(&transY), sizeof(float));
+		//transX = 0.0;
+		//transY = 0.0;
 		fileStream.read((char*)(&nParts), sizeof(int));
 		fileStream.read((char*)(&nEigs), sizeof(int));
 		fileStream.read((char*)(&lenEigVects), sizeof(int));
-		
+
 		ModelParts.resize(nParts);
 		for(int i = 0; i < nParts; i++){				// Parts
 			fileStream.read((char*)(&partSize),sizeof(int));
+			//ModelParts[i].partPts.resize(partSize);
 			for(int j = 0; j < partSize; j++){
 				int var;
 				fileStream.read((char*)(&var),sizeof(int));

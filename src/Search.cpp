@@ -53,6 +53,7 @@ int searchASM(path inDir, path modelPath, path detectorName, path outDirectory){
 		cerr << "Model failed to load from: " << modelPath.string() << endl; 
 		return FAILURE;
 	}
+
 	Constants::instance()->setFromModel(model.getnLevels1D(), model.getnLevels2D(), model.get1DprofLen(), model.get2DprofLen()); // Set the singleton variables for global access to model parameters
 
 	// Determine the amount of eigenvalues to use for the search
@@ -72,7 +73,6 @@ int searchASM(path inDir, path modelPath, path detectorName, path outDirectory){
 	vector<Shape> toBeSearched; // vector which holds all of the images to be searched
 	Model::loadImagesForSearch(inDir, toBeSearched);
 	int nShapes = toBeSearched.size();
-
 
 	int DetRefWidth = model.getDetRefWidth();
 	//ASM_Shape ModelAvgShape = Model.getDetetorAvgShape();     
@@ -97,14 +97,12 @@ void Model::initSearch(vector<Shape> &toBeSearched, path outDirectory, path dete
 	// Setup the Face Detector
 	Detector *det;
 	if(Constants::instance()->getDetector_t() == Constants::VJ){
-		VJ_Detector VJDet;  // Detector object
 		VJDet.face_cascade = new CascadeClassifier();
 		det = &VJDet;
 		det->init(detectorName); // Setup VJ detector
 	}
 #ifdef WITH_PITTPATT
 	else if(Constants::instance()->getDetector_t() == Constants::PP){
-		PP_Detector PPDet;
 		det = &PPDet;
 		det->init(detectorName); // Setup PittPatt detector
 	}
@@ -116,7 +114,6 @@ void Model::initSearch(vector<Shape> &toBeSearched, path outDirectory, path dete
 		scaledModelShapes.push_back(ModelAvgShape); // Each level is half the resolution of the previous
 		// ModelAvgShape has now been changed, so use the vector to access each levels model shape from here on.
 	}
-
 
 	searchLandmarks(toBeSearched, outDirectory, det, scaledModelShapes);
 	
